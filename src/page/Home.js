@@ -9,8 +9,10 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    Button
 } from 'react-native';
+import {getNews} from '../utils/getNews'
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -21,32 +23,41 @@ const instructions = Platform.select({
 
 export default class App extends Component<{}> {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            loading: true
-        }
+            loading: true,
+            data:null
+        };
         this.setTimeout = setTimeout.bind(this)
     }
 
     componentDidMount() {
-        this.setTimeout(() => this.setState({loading: false}), 3000)
+        let data = getNews();
+        this.setState({
+            loading: false,
+            data:data.data
+        })
     }
 
     render() {
+        const {navigate} = this.props.navigation;
         if (this.state.loading) {
             return this.loading()
         } else {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.welcome}>
-                        Welcome to my dick
-                    </Text>
-                    <Text style={styles.instructions}>
-                        To get started, edit App.js
-                    </Text>
-                    <Text style={styles.instructions}>
-                        {instructions}
-                    </Text>
+                    <Button
+                        title="详情"
+                        onPress={()=> navigate('Details')}
+                    />
+                    <Button
+                        title="关于"
+                        onPress={()=>navigate('About')}
+                    />
+                    <Button
+                        title="列表"
+                        onPress={()=>navigate('List')}
+                    />
                 </View>
             );
         }
