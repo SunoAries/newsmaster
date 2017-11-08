@@ -10,33 +10,29 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
+    Button,
+    ScrollView,
+    Image,
+    TouchableHighlight
 } from 'react-native';
-import {getNews} from '../utils/getNews'
-
-const instructions = Platform.select({
-    ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-    android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import getNews from '../utils/getNews'
 
 export default class App extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
             loading: true,
-            data:null
+            data: null
         };
-        this.setTimeout = setTimeout.bind(this)
     }
 
-    componentDidMount() {
-        let data = getNews();
-        this.setState({
-            loading: false,
-            data:data.data
-        })
+    async componentDidMount() {
+        getNews().then(res => {
+            this.setState({
+                loading: false,
+                data: res.subjects
+            })
+        });
     }
 
     render() {
@@ -45,20 +41,39 @@ export default class App extends Component<{}> {
             return this.loading()
         } else {
             return (
-                <View style={styles.container}>
+                <ScrollView style={styles.container}>
                     <Button
                         title="详情"
-                        onPress={()=> navigate('Details')}
+                        onPress={() => navigate('Details', {movieList: this.state.data})}
                     />
                     <Button
                         title="关于"
-                        onPress={()=>navigate('About')}
+                        onPress={() => navigate('About')}
                     />
                     <Button
                         title="列表"
-                        onPress={()=>navigate('List')}
+                        onPress={() => navigate('List')}
                     />
-                </View>
+                    {this.state.data.map(function (movie) {
+                        return (
+                            <TouchableHighlight
+                                style={{flex: 1}}
+                                key={movie.id}
+                                underlayColor='#a9a9a9'
+                                onPress={() => navigate('Details', {movie})}
+                            >
+                                <View>
+                                    <Text style={{justifyContent: 'center'}}>{movie.title}</Text>
+
+                                    <Image
+                                        style={styles.base}
+                                        source={{uri: movie.images.medium}}
+                                    />
+                                    <Text style={{justifyContent: 'center'}}>{movie.year}</Text>
+                                </View>
+                            </TouchableHighlight>
+                        )})}
+                </ScrollView>
             );
         }
     }
@@ -80,9 +95,11 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        paddingTop: 20,
+    },
+    base: {
+        width: 200,
+        height: 200,
     },
     loading: {
         fontSize: 40,
