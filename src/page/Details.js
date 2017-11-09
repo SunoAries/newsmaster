@@ -3,7 +3,7 @@ import {
     StyleSheet,
     Text,
     View,
-    ListView,
+    Image,
 } from 'react-native';
 
 
@@ -11,22 +11,26 @@ export default class App extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
-            movies: null,
-            dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-            }),
-            loaded: false,
-            position: 'unknown',
-            time: new Date(),
-            text: 'fuck you'
         };
     }
 
 
     render() {
+        let {state}=this.props.navigation
+        let movie = state.params.movie
+        debugger
         return (
             <View style={styles.container}>
-                <Text>详细页面</Text>
+                <Image style={styles.header} source={{uri:movie.images.medium}} />
+                <View style={styles.text}>
+                    <Text>{movie.title}</Text>
+                    <Text>{movie.original_title}</Text>
+                    <Text>{movie.genres.join(' ')}</Text>
+                    <Text>导演：{movie.directors[0].name}</Text>
+                    <Text>时长：{movie.durations}</Text>
+                    <Text>得分: {movie.rating.average}</Text>
+                    <Text>上映时间{movie.mainland_pubdate}</Text>
+                </View>
             </View>
         )
 
@@ -36,9 +40,16 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0F0',
+        backgroundColor: '#fff',
     },
+    header:{
+        width:400,
+        height:400
+    },
+    text:{
+        flex:1
+    }
 });

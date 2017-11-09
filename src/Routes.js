@@ -4,6 +4,7 @@ import Home from './page/Home';
 import Details from './page/Details';
 import About from './page/About';
 import List from './page/List';
+import WebView from './page/WebView';
 
 const Navi = StackNavigator({
     Home: {
@@ -14,7 +15,8 @@ const Navi = StackNavigator({
     },
     Details: {screen: Details},
     List:{screen:List},
-    About:{screen:About}
+    About:{screen:About},
+    WebView:{screen:WebView}
 }, {
     headerMode: 'none',
     mode: 'modal',

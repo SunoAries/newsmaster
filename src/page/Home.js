@@ -12,7 +12,7 @@ import {
     View,
     Button,
     ScrollView,
-    Image,
+    ImageBackground,
     TouchableHighlight
 } from 'react-native';
 import getNews from '../utils/getNews'
@@ -43,12 +43,12 @@ export default class App extends Component<{}> {
             return (
                 <ScrollView style={styles.container}>
                     <Button
-                        title="详情"
-                        onPress={() => navigate('Details', {movieList: this.state.data})}
+                        title="关于作者"
+                        onPress={() => navigate('About')}
                     />
                     <Button
-                        title="关于"
-                        onPress={() => navigate('About')}
+                        title="列表"
+                        onPress={() => navigate('List')}
                     />
                     <Button
                         title="列表"
@@ -62,14 +62,15 @@ export default class App extends Component<{}> {
                                 underlayColor='#a9a9a9'
                                 onPress={() => navigate('Details', {movie})}
                             >
-                                <View>
-                                    <Text style={{justifyContent: 'center'}}>{movie.title}</Text>
+                                <View style={{flexDirection:'row'}}>
 
-                                    <Image
-                                        style={styles.base}
-                                        source={{uri: movie.images.medium}}
-                                    />
-                                    <Text style={{justifyContent: 'center'}}>{movie.year}</Text>
+                                    <ImageBackground
+                                        style={[styles.base,{flex:1}]}
+                                        source={{uri: movie.images.large}}
+                                    >
+                                        <Text style={{justifyContent: 'center'}}>{movie.title}</Text>
+                                        <Text style={{justifyContent: 'center'}}>{movie.mainland_pudate}</Text>
+                                    </ImageBackground>
                                 </View>
                             </TouchableHighlight>
                         )})}
