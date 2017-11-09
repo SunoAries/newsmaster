@@ -8,7 +8,7 @@ export default class Todo extends Component {
     render() {
         return (
             <Text
-                onClick={this.props.onClick}
+                onPress={this.props.onClick}
                 style={{
                     textDecorationLine: this.props.completed ? 'line-through' : 'none',
                 }}>
