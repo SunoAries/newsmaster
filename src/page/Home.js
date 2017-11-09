@@ -47,12 +47,12 @@ export default class App extends Component<{}> {
                         onPress={() => navigate('About')}
                     />
                     <Button
-                        title="列表"
-                        onPress={() => navigate('List')}
+                        title="list"
+                        onPress={() => navigate('WebView',{url:'http://www.baidu.com'})}
                     />
                     <Button
                         title="列表"
-                        onPress={() => navigate('List')}
+                        onPress={() => navigate('Todo')}
                     />
                     {this.state.data.map(function (movie) {
                         return (

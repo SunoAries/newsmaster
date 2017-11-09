@@ -3,7 +3,7 @@ import {StackNavigator} from 'react-navigation';
 import Home from './page/Home';
 import Details from './page/Details';
 import About from './page/About';
-import List from './page/List';
+import Todo from './page/Todo';
 import WebView from './page/WebView';
 
 const Navi = StackNavigator({
@@ -14,7 +14,7 @@ const Navi = StackNavigator({
         },
     },
     Details: {screen: Details},
-    List:{screen:List},
+    Todo:{screen:Todo},
     About:{screen:About},
     WebView:{screen:WebView}
 }, {

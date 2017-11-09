@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {AppRegistry, StatusBar, View, BackHandler, StyleSheet} from 'react-native';
-import Navi from './src/Routes';
+import Main from './src/Main';
 
 
 class Wrap extends Component {
@@ -31,7 +31,7 @@ class Wrap extends Component {
                 <StatusBar
                     backgroundColor='transparent'
                     translucent/>
-                <Navi/>
+                <Main/>
             </View>
         )
     }
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
 });
 
 
-AppRegistry.registerComponent('newsmaster', () => Wrap);
+AppRegistry.registerComponent('newsmaster', () => Main);

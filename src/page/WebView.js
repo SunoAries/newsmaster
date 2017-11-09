@@ -8,11 +8,11 @@ class WebViewPage extends Component {
     }
 
     render () {
-        const {goBack} = this.props.navigation;
+        const {state,goBack} = this.props.navigation;
         return (
             <View style={{flex: 1}}>
                 <WebView
-                    source={{uri: this.props.url}}/>
+                    source={{uri: state.params.url}}/>
             </View>
         )
     }

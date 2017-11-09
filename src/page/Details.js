@@ -18,7 +18,6 @@ export default class App extends Component<{}> {
     render() {
         let {state}=this.props.navigation
         let movie = state.params.movie
-        debugger
         return (
             <View style={styles.container}>
                 <Image style={styles.header} source={{uri:movie.images.medium}} />
