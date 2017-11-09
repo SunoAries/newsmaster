@@ -62,7 +62,7 @@ function selectTodos(todos, filter) {
 
 // Which props do we want to inject, given the global state?
 // Note: use https://github.com/faassen/reselect for better performance.
-function select(state) {
+function mapStateToProps(state) {
     return {
         visibleTodos: selectTodos(state.todos, state.visibilityFilter),
         visibilityFilter: state.visibilityFilter
@@ -70,7 +70,7 @@ function select(state) {
 }
 
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
-export default connect(select)(App)
+export default connect(mapStateToProps)(App)
 
 const styles = StyleSheet.create({
     container: {

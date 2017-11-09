@@ -17,14 +17,14 @@ export default class AddTodo extends Component {
     render() {
         return (
             <View>
+                <Button
+                    title='添加到列表里面'
+                    onPress ={(e) => this.handleClick(e)}
+                />
                 <TextInput
                     style={{borderColor:'#f00'}}
                     value={this.state.text}
                     onChangeText={(text) => this.setState({text})}
-                />
-                <Button
-                    title='Add'
-                    onPress ={(e) => this.handleClick(e)}
                 />
             </View>
         )
