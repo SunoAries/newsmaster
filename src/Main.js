@@ -1,11 +1,10 @@
 import App from './Routes'
 import React from 'react'
-import {createStore} from 'redux'
+import createStore from './redux/configureStore'
 import {Provider} from 'react-redux'
-import todoApp from './redux/reducers'
 
 
-let store = createStore(todoApp)
+let store = createStore();
 
 function AA() {
     return <Provider store={store}>

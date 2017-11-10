@@ -16,8 +16,10 @@ import {
     TouchableHighlight
 } from 'react-native';
 import getNews from '../utils/getNews'
+import {connect} from 'react-redux'
+import {getMovieList} from '../redux/actions'
 
-export default class App extends Component<{}> {
+class App extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,17 +29,23 @@ export default class App extends Component<{}> {
     }
 
     async componentDidMount() {
-        getNews().then(res => {
-            this.setState({
-                loading: false,
-                data: res.subjects
-            })
-        });
+        //  debugger
+        // let res = await getNews()
+        //  debugger
+        //  this.setState({
+        //      loading: false,
+        //      data: res.subjects
+        //  })
+        const {dispatch} = this.props;
+        debugger
+        dispatch(getMovieList())
     }
 
     render() {
+        debugger
         const {navigate} = this.props.navigation;
-        if (this.state.loading) {
+        const {movieList} = this.props;
+        if (!movieList.length) {
             return this.loading()
         } else {
             return (
@@ -48,13 +56,13 @@ export default class App extends Component<{}> {
                     />
                     <Button
                         title="list"
-                        onPress={() => navigate('WebView',{url:'http://www.baidu.com'})}
+                        onPress={() => navigate('WebView', {url: 'http://www.baidu.com'})}
                     />
                     <Button
                         title="列表"
                         onPress={() => navigate('Todo')}
                     />
-                    {this.state.data.map(function (movie) {
+                    {movieList.map(function (movie) {
                         return (
                             <TouchableHighlight
                                 style={{flex: 1}}
@@ -62,10 +70,10 @@ export default class App extends Component<{}> {
                                 underlayColor='#a9a9a9'
                                 onPress={() => navigate('Details', {movie})}
                             >
-                                <View style={{flexDirection:'row'}}>
+                                <View style={{flexDirection: 'row'}}>
 
                                     <ImageBackground
-                                        style={[styles.base,{flex:1}]}
+                                        style={[styles.base, {flex: 1}]}
                                         source={{uri: movie.images.large}}
                                     >
                                         <Text style={{justifyContent: 'center'}}>{movie.title}</Text>
@@ -73,7 +81,8 @@ export default class App extends Component<{}> {
                                     </ImageBackground>
                                 </View>
                             </TouchableHighlight>
-                        )})}
+                        )
+                    })}
                 </ScrollView>
             );
         }
@@ -119,3 +128,11 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
 });
+
+function mapStateToProps(state) {
+    return {
+        movieList: state.movieList
+    }
+}
+
+export default connect(mapStateToProps)(App)

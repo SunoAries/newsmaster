@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from './actions'
+import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters,GET_MOVIE_LIST } from './actions'
 const { SHOW_ALL } = VisibilityFilters
 
 function visibilityFilter(state = SHOW_ALL, action) {
@@ -43,10 +43,20 @@ function todos(state = [], action) {
             return state
     }
 }
+function movieList(state=[],action) {
+    debugger
+    switch (action.type){
+        case GET_MOVIE_LIST :
+            return action.movieList;
+        default:
+            return state
+    }
+}
 
 const todoApp = combineReducers({
     visibilityFilter,
-    todos
+    todos,
+    movieList
 })
 
 export default todoApp
