@@ -29,7 +29,6 @@ class App extends Component<{}> {
     }
 
     async componentDidMount() {
-        //  debugger
         // let res = await getNews()
         //  debugger
         //  this.setState({
@@ -37,12 +36,10 @@ class App extends Component<{}> {
         //      data: res.subjects
         //  })
         const {dispatch} = this.props;
-        debugger
         dispatch(getMovieList())
     }
 
     render() {
-        debugger
         const {navigate} = this.props.navigation;
         const {movieList} = this.props;
         if (!movieList.length) {
