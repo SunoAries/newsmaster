@@ -14,4 +14,5 @@ export default function configureStore(preloadedState) {
         )
     )
     //applyMiddleware(asdf,asdf,asdf)()createStore
+    //let newStore = applyMiddleware(mid1, mid2, mid3, ...)(createStore)(reducer, null);
 }

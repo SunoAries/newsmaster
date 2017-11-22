@@ -18,6 +18,8 @@ import {
 import getNews from '../utils/getNews'
 import {connect} from 'react-redux'
 import {getMovieList} from '../redux/actions'
+import Icon from 'react-native-vector-icons/FontAwesome';
+const myIcon = (<Icon name="rocket" size={30} color="#900" />)
 
 class App extends Component<{}> {
     constructor(props) {
@@ -91,6 +93,7 @@ class App extends Component<{}> {
                 <Text style={styles.loading}>
                     加载中
                 </Text>
+                {myIcon}
                 <Text style={styles.loading}>
                     这是欢迎界面
                 </Text>
